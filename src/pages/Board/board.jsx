@@ -5,12 +5,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Columns from "./components/Columns/columns";
 
 const Board = () => {
-  const { loading, taskStatus } = useContext(TaskContext);
+  const { loading, taskStatus, darkMode } = useContext(TaskContext);
 
   return (
-    <div className="board">
+    <div className={`board ${darkMode && "bgDarkmode"}`}>
       {loading ? (
-        <ClipLoader />
+        <ClipLoader color="var(--primary-color)" size={60}/>
       ) : (
         <div className="board-columns-container">
           {taskStatus.map((status) => (

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./taskCard.css";
 import { formatDate } from "../../utils/formatDate";
+import { TaskContext } from "../../context/taskContext";
 
 const TaskCard = ({ task }) => {
+  const {darkMode} = useContext(TaskContext);
+
   const {
     id,
     name,
@@ -40,7 +43,7 @@ const TaskCard = ({ task }) => {
   }
 
   return (
-    <div key={id} className="task-card">
+    <div key={id} className={`task-card ${darkMode && "bgSecondaryDarkMode"}`}>
       <h3>{name}</h3>
       <span>{summary}</span>
       <div>

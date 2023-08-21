@@ -40,4 +40,5 @@
   border-radius: 5px;
   padding: 2px 4px;
   border: 1px solid var(--primary-color);
+  color: var(--black-color);
 }
