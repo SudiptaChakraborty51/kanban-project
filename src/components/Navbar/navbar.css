@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0; 
+  padding: 10px 0;
 }
 
 .navbar .left-nav h2 {
@@ -51,6 +51,11 @@
 
 .middle-nav input::placeholder {
   color: var(--grey-color);
+}
+
+.navbar .right-nav {
+  display: flex;
+  gap: 2rem;
 }
 
 .navbar .right-nav i {

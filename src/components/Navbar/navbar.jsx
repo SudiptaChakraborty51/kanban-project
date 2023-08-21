@@ -21,15 +21,21 @@ const Navbar = () => {
             placeholder="Search tasks by name..."
             className={`${darkMode && "bgSecondaryDarkMode"}`}
           />
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass" title="search"></i>
         </div>
         <div className="right-nav">
+          <i className="fa-solid fa-chart-simple" title="metrics" onClick={() => navigate("/metrics")}></i>
           {darkMode ? (
-            <i class="fa-solid fa-sun" onClick={() => setDarkMode(false)}></i>
+            <i
+              class="fa-solid fa-sun"
+              onClick={() => setDarkMode(false)}
+              title="light mode"
+            ></i>
           ) : (
             <i
               className="fa-solid fa-moon"
               onClick={() => setDarkMode(true)}
+              title="dark mode"
             ></i>
           )}
         </div>
