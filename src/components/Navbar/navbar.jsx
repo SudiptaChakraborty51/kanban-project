@@ -4,7 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { TaskContext } from "../../context/taskContext";
 
 const Navbar = () => {
-  const { darkMode, setDarkMode } = useContext(TaskContext);
+  const { darkMode, setDarkMode, taskState, taskDispatch } =
+    useContext(TaskContext);
   const navigate = useNavigate();
 
   return (
@@ -18,13 +19,21 @@ const Navbar = () => {
         <div className={`middle-nav ${darkMode && "bgSecondaryDarkMode"}`}>
           <input
             type="text"
+            value={taskState?.search}
+            onChange={(e) =>
+              taskDispatch({ type: "SET_SEARCH", payload: e.target.value })
+            }
             placeholder="Search tasks by name..."
             className={`${darkMode && "bgSecondaryDarkMode"}`}
           />
           <i className="fa-solid fa-magnifying-glass" title="search"></i>
         </div>
         <div className="right-nav">
-          <i className="fa-solid fa-chart-simple" title="metrics" onClick={() => navigate("/metrics")}></i>
+          <i
+            className="fa-solid fa-chart-simple"
+            title="metrics"
+            onClick={() => navigate("/metrics")}
+          ></i>
           {darkMode ? (
             <i
               class="fa-solid fa-sun"

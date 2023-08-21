@@ -37,22 +37,30 @@ const TaskProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  const filteredTasks =
+    taskState?.search?.trim() !== ""
+      ? taskState.tasks.filter((task) =>
+          task?.name
+            ?.toLowerCase()
+            .replace(/\s/g, "")
+            .includes(taskState?.search?.toLowerCase().replace(/\s/g, ""))
+        )
+      : taskState.tasks;
+
   const taskStatus = ["Ready", "In Progress", "Testing", "Done"];
 
-  const readyTasks = taskState.tasks.filter(({ status }) => status === "Ready");
-  const inProgressTasks = taskState.tasks.filter(
+  const readyTasks = filteredTasks?.filter(({ status }) => status === "Ready");
+  const inProgressTasks = filteredTasks?.filter(
     ({ status }) => status === "In Progress"
   );
-  const testingTasks = taskState.tasks.filter(
+  const testingTasks = filteredTasks?.filter(
     ({ status }) => status === "Testing"
   );
-  const doneTasks = taskState.tasks.filter(({ status }) => status === "Done");
+  const doneTasks = filteredTasks?.filter(({ status }) => status === "Done");
 
   useEffect(() => {
     localStorage.setItem("theme", `${darkMode ? "dark" : "light"}`);
   }, [darkMode]);
-
-  console.log(taskState);
 
   return (
     <TaskContext.Provider
