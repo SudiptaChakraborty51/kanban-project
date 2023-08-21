@@ -7,6 +7,9 @@ export const TaskContext = createContext();
 const TaskProvider = ({ children }) => {
   const [taskState, taskDispatch] = useReducer(taskReducer, initialTaskState);
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark" ? true : false
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,10 +37,16 @@ const TaskProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("theme", `${darkMode ? "dark" : "light"}`);
+  }, [darkMode]);
+
   console.log(taskState);
 
   return (
-    <TaskContext.Provider value={{ loading, taskState, taskDispatch }}>
+    <TaskContext.Provider
+      value={{ loading, taskState, taskDispatch, darkMode, setDarkMode }}
+    >
       {children}
     </TaskContext.Provider>
   );
