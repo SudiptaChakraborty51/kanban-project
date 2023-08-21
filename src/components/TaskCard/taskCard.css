@@ -8,6 +8,8 @@
   padding: 10px;
   gap: 0.5rem;
   cursor: pointer;
+  height: 220px;
+  width: 250px;
 }
 
 .task-card:hover {
@@ -24,6 +26,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .priority-type-div span:first-child {
