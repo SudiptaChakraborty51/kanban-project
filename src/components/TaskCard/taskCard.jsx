@@ -4,7 +4,7 @@ import { formatDate } from "../../utils/formatDate";
 import { TaskContext } from "../../context/taskContext";
 
 const TaskCard = ({ task }) => {
-  const {darkMode} = useContext(TaskContext);
+  const { darkMode } = useContext(TaskContext);
 
   const {
     id,
@@ -15,6 +15,7 @@ const TaskCard = ({ task }) => {
     startDate,
     endDate,
     type,
+    status,
     assignee,
   } = task;
 
@@ -44,7 +45,9 @@ const TaskCard = ({ task }) => {
 
   return (
     <div key={id} className={`task-card ${darkMode && "bgSecondaryDarkMode"}`}>
-      <h3>{name}</h3>
+      <h3 style={{ textDecoration: status === "Done" && "line-through" }}>
+        {name}
+      </h3>
       <span>{summary}</span>
       <div>
         <i className="fa-regular fa-circle-user"></i> <span>{assignee}</span>
