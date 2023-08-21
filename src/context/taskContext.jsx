@@ -37,6 +37,17 @@ const TaskProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  const taskStatus = ["Ready", "In Progress", "Testing", "Done"];
+
+  const readyTasks = taskState.tasks.filter(({ status }) => status === "Ready");
+  const inProgressTasks = taskState.tasks.filter(
+    ({ status }) => status === "In Progress"
+  );
+  const testingTasks = taskState.tasks.filter(
+    ({ status }) => status === "Testing"
+  );
+  const doneTasks = taskState.tasks.filter(({ status }) => status === "Done");
+
   useEffect(() => {
     localStorage.setItem("theme", `${darkMode ? "dark" : "light"}`);
   }, [darkMode]);
@@ -45,7 +56,18 @@ const TaskProvider = ({ children }) => {
 
   return (
     <TaskContext.Provider
-      value={{ loading, taskState, taskDispatch, darkMode, setDarkMode }}
+      value={{
+        loading,
+        taskState,
+        taskDispatch,
+        darkMode,
+        setDarkMode,
+        readyTasks,
+        inProgressTasks,
+        testingTasks,
+        doneTasks,
+        taskStatus,
+      }}
     >
       {children}
     </TaskContext.Provider>
