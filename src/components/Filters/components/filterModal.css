@@ -1,0 +1,53 @@
+.filter-modal {
+  background-color: var(--light-teal);
+  width: 18.5rem;
+  height: 32rem;
+  z-index: 10;
+  left: 1rem;
+  position: absolute;
+  border-radius: 5px;
+  overflow-y: scroll;
+  border: 1px solid var(--black-color);
+  padding: 10px;
+}
+
+.filter-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-modal .modal-header h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.fa-xmark {
+  cursor: pointer;
+}
+
+.filter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter-content p {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.filter-content div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.clear-btn {
+  padding: 2px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}

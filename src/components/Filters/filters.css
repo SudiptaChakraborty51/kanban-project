@@ -1,0 +1,7 @@
+.filter {
+  background-color: var(--secondary-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 50px;
+}
