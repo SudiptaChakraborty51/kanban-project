@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./columns.css";
 import { TaskContext } from "../../../../context/taskContext";
 import TaskCard from "../../../../components/TaskCard/taskCard";
+import { Droppable } from "react-beautiful-dnd";
 
 const Columns = ({ status }) => {
   const { readyTasks, inProgressTasks, testingTasks, doneTasks } =
@@ -33,13 +34,24 @@ const Columns = ({ status }) => {
         <span>{status.toUpperCase()}</span>{" "}
         <span>({taskToRender?.length})</span>
       </div>
-      <div className="columns-item-container">
-      {taskToRender?.length === 0 ? (
-        <p>No task is present</p>
-      ) : (
-        taskToRender?.map((task) => <TaskCard task={task} key={task.id} />)
-      )}
-      </div>
+      <Droppable droppableId={status}>
+        {(provided) => (
+          <div
+            className="columns-item-container"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {taskToRender?.length === 0 ? (
+              <p>No task is present</p>
+            ) : (
+              taskToRender?.map((task, index) => (
+                <TaskCard task={task} key={task.id} index={index}/>
+              ))
+            )}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 };

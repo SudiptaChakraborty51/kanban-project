@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import "./taskCard.css";
 import { formatDate } from "../../utils/formatDate";
 import { TaskContext } from "../../context/taskContext";
+import { Draggable } from "react-beautiful-dnd";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, index }) => {
   const { darkMode } = useContext(TaskContext);
 
   const {
@@ -44,31 +45,42 @@ const TaskCard = ({ task }) => {
   }
 
   return (
-    <div key={id} className={`task-card ${darkMode && "bgSecondaryDarkMode"}`}>
-      <h3 style={{ textDecoration: status === "Done" && "line-through" }}>
-        {name}
-      </h3>
-      <span>{summary}</span>
-      <div>
-        <i className="fa-regular fa-circle-user"></i> <span>{assignee}</span>
-      </div>
-      <div>
-        <i className="fa-solid fa-clock-rotate-left"></i>{" "}
-        <span>{effortSpent} hours spent</span>
-      </div>
-      <div>
-        <i className="fa-regular fa-calendar"></i>{" "}
-        <span>{formatDate(startDate)}</span>
-      </div>
-      <div>
-        <i className="fa-regular fa-calendar-check"></i>{" "}
-        <span>{formatDate(endDate)}</span>
-      </div>
-      <div className="priority-type-div">
-        <span style={priorityStyle}>{priority}</span>
-        <span>{type}</span>
-      </div>
-    </div>
+    <Draggable draggableId={id.toString()} index={index}>
+      {(provided) => (
+        <div
+          key={id}
+          className={`task-card ${darkMode && "bgSecondaryDarkMode"}`}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <h3 style={{ textDecoration: status === "Done" && "line-through" }}>
+            {name}
+          </h3>
+          <span>{summary}</span>
+          <div>
+            <i className="fa-regular fa-circle-user"></i>{" "}
+            <span>{assignee}</span>
+          </div>
+          <div>
+            <i className="fa-solid fa-clock-rotate-left"></i>{" "}
+            <span>{effortSpent} hours spent</span>
+          </div>
+          <div>
+            <i className="fa-regular fa-calendar"></i>{" "}
+            <span>{formatDate(startDate)}</span>
+          </div>
+          <div>
+            <i className="fa-regular fa-calendar-check"></i>{" "}
+            <span>{formatDate(endDate)}</span>
+          </div>
+          <div className="priority-type-div">
+            <span style={priorityStyle}>{priority}</span>
+            <span>{type}</span>
+          </div>
+        </div>
+      )}
+    </Draggable>
   );
 };
 
