@@ -1,0 +1,30 @@
+.doughnut-chart .doughnut-chart-main {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.doughnut-chart-main .assignee-doughnut {
+  width: 500px;
+  height: 500px;
+  background-color: var(--white-color);
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.doughnut-chart-main .assignee-doughnut:hover {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.doughnut-chart h2 {
+  margin: 0;
+}
+
+.doughnut-chart {
+  margin-top: 2rem;
+}
