@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import "./filterModal.css";
 import { TaskContext } from "../../../context/taskContext";
 
-const FilterModal = ({ showFilters, setShowFilters }) => {
-  const { taskState, darkMode } = useContext(TaskContext);
+const FilterModal = ({ setShowFilters }) => {
+  const { taskState, darkMode, taskDispatch } = useContext(TaskContext);
 
   const assigneeArray = taskState?.tasks?.reduce(
     (acc, curr) =>
@@ -21,7 +21,15 @@ const FilterModal = ({ showFilters, setShowFilters }) => {
     <div className={`filter-modal ${darkMode && "bgSecondaryDarkMode"}`}>
       <div className="modal-header">
         <h3>Filters</h3>
-        <span className="clear-btn">Clear</span>
+        <span
+          className="clear-btn"
+          onClick={() => {
+            taskDispatch({ type: "CLEAR_FILTERS", payload: taskState.tasks });
+            setShowFilters((prev) => !prev);
+          }}
+        >
+          Clear
+        </span>
         <i
           className="fa-solid fa-xmark"
           onClick={() => setShowFilters((prev) => !prev)}
@@ -32,19 +40,59 @@ const FilterModal = ({ showFilters, setShowFilters }) => {
         <p>Filter By Date</p>
         <div>
           <label>
-            <input type="radio" />
+            <input
+              type="radio"
+              value="startDate_asc"
+              checked={taskState.dateOption === "startDate_asc"}
+              onChange={(e) =>
+                taskDispatch({
+                  type: "SET_DATE_OPTION",
+                  payload: e.target.value,
+                })
+              }
+            />
             <span>Ascending based on start date</span>
           </label>
           <label>
-            <input type="radio" />
+            <input
+              type="radio"
+              value="startDate_desc"
+              checked={taskState.dateOption === "startDate_desc"}
+              onChange={(e) =>
+                taskDispatch({
+                  type: "SET_DATE_OPTION",
+                  payload: e.target.value,
+                })
+              }
+            />
             <span>Descending based on start date</span>
           </label>
           <label>
-            <input type="radio" />
+            <input
+              type="radio"
+              value="endDate_asc"
+              checked={taskState.dateOption === "endDate_asc"}
+              onChange={(e) =>
+                taskDispatch({
+                  type: "SET_DATE_OPTION",
+                  payload: e.target.value,
+                })
+              }
+            />
             <span>Ascending based on end date</span>
           </label>
           <label>
-            <input type="radio" />
+            <input
+              type="radio"
+              value="endDate_desc"
+              checked={taskState.dateOption === "endDate_desc"}
+              onChange={(e) =>
+                taskDispatch({
+                  type: "SET_DATE_OPTION",
+                  payload: e.target.value,
+                })
+              }
+            />
             <span>Descending based on end date</span>
           </label>
         </div>
@@ -55,7 +103,17 @@ const FilterModal = ({ showFilters, setShowFilters }) => {
         <div>
           {assigneeArray?.map((assignee) => (
             <label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                value={assignee}
+                checked={taskState?.assigneeOption?.includes(assignee)}
+                onChange={(e) =>
+                  taskDispatch({
+                    type: "SET_ASSIGNEE_OPTION",
+                    payload: e.target.value,
+                  })
+                }
+              />
               <span>{assignee}</span>
             </label>
           ))}
@@ -67,7 +125,17 @@ const FilterModal = ({ showFilters, setShowFilters }) => {
         <div>
           {priorityArray?.map((priority) => (
             <label>
-              <input type="radio" />
+              <input
+                type="radio"
+                value={priority}
+                checked={taskState.priorityOption === priority}
+                onChange={(e) =>
+                  taskDispatch({
+                    type: "SET_PRIORITY_OPTION",
+                    payload: e.target.value,
+                  })
+                }
+              />
               <span>{priority}</span>
             </label>
           ))}

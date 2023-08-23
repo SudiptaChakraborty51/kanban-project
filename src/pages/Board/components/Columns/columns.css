@@ -38,3 +38,7 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
+
+.columns {
+  width: 270px;
+}

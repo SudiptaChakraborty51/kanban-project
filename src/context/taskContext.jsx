@@ -37,7 +37,9 @@ const TaskProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  const filteredTasks =
+  let filteredTasks = taskState.tasks;
+
+  filteredTasks =
     taskState?.search?.trim() !== ""
       ? taskState.tasks.filter((task) =>
           task?.name
@@ -46,6 +48,39 @@ const TaskProvider = ({ children }) => {
             .includes(taskState?.search?.toLowerCase().replace(/\s/g, ""))
         )
       : taskState.tasks;
+
+  filteredTasks =
+    taskState?.dateOption !== ""
+      ? // eslint-disable-next-line
+        filteredTasks.sort((a, b) => {
+          if (taskState?.dateOption === "startDate_asc") {
+            return new Date(a.startDate) - new Date(b.startDate);
+          }
+          if (taskState?.dateOption === "startDate_desc") {
+            return new Date(b.startDate) - new Date(a.startDate);
+          }
+          if (taskState?.dateOption === "endDate_asc") {
+            return new Date(a.endDate) - new Date(b.endDate);
+          }
+          if (taskState?.dateOption === "endDate_desc") {
+            return new Date(b.endDate) - new Date(a.endDate);
+          }
+        })
+      : filteredTasks;
+
+  filteredTasks =
+    taskState?.assigneeOption?.length > 0
+      ? filteredTasks?.filter(({ assignee }) =>
+          taskState?.assigneeOption?.includes(assignee)
+        )
+      : filteredTasks;
+
+  filteredTasks =
+    taskState.priorityOption !== ""
+      ? filteredTasks.filter(
+          (task) => task?.priority === taskState.priorityOption
+        )
+      : filteredTasks;
 
   const taskStatus = ["Ready", "In Progress", "Testing", "Done"];
 
