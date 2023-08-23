@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./filterModal.css";
 import { TaskContext } from "../../../context/taskContext";
+import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 const FilterModal = ({ setShowFilters }) => {
   const { taskState, darkMode, taskDispatch } = useContext(TaskContext);
@@ -17,8 +18,13 @@ const FilterModal = ({ setShowFilters }) => {
     []
   );
 
+  const filterModalNode = useOutsideClick(() => setShowFilters(false));
+
   return (
-    <div className={`filter-modal ${darkMode && "bgSecondaryDarkMode"}`}>
+    <div
+      className={`filter-modal ${darkMode && "bgSecondaryDarkMode"}`}
+      ref={filterModalNode}
+    >
       <div className="modal-header">
         <h3>Filters</h3>
         <span
