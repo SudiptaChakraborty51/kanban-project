@@ -20,9 +20,10 @@ const Navbar = () => {
           <input
             type="text"
             value={taskState?.search}
-            onChange={(e) =>
-              taskDispatch({ type: "SET_SEARCH", payload: e.target.value })
-            }
+            onChange={(e) => {
+              navigate("/");
+              taskDispatch({ type: "SET_SEARCH", payload: e.target.value });
+            }}
             placeholder="Search tasks by name..."
             className={`${darkMode && "bgSecondaryDarkMode"}`}
           />
