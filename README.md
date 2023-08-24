@@ -1,6 +1,6 @@
 # Kanban-Project
 
-[kanban-project]([https://kanban-project-cyan.vercel.app/]) - A Web Application for Task Management
+[kanban-project](https://kanban-project-cyan.vercel.app/) - A Web Application for Task Management
 
 ## How to install and run locally?
 
