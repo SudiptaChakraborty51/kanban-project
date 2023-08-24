@@ -42,3 +42,12 @@
 .columns {
   width: 270px;
 }
+
+.dragactive {
+  background-color: var(--light-teal);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.dragactive-dark {
+  background-color: var(--dragactive-darkmode);
+}

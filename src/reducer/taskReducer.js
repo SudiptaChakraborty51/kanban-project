@@ -11,7 +11,14 @@ export const taskReducer = (state, { type, payload }) => {
     case "GET_TASKS":
       return { ...state, tasks: payload };
     case "UPDATE_TASKS":
-      return { ...state, tasks: payload };
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id.toString() === payload.id
+            ? { ...task, status: payload.status }
+            : task
+        ),
+      };
     case "SET_SEARCH":
       return { ...state, search: payload };
     case "SET_DATE_OPTION":

@@ -7,7 +7,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import Filters from "../../components/Filters/filters";
 
 const Board = () => {
-  const { loading, taskStatus, darkMode, taskState, taskDispatch } =
+  const { loading, taskStatus, darkMode, taskDispatch } =
     useContext(TaskContext);
 
   const onDragEnd = (result) => {
@@ -21,11 +21,10 @@ const Board = () => {
     )
       return;
 
-    const items = Array.from(taskState?.tasks);
-    const [reorderedItem] = items.splice(source.index, 1);
-    items.splice(destination.index, 0, reorderedItem);
-
-    taskDispatch({ type: "UPDATE_TASKS", payload: items });
+    taskDispatch({
+      type: "UPDATE_TASKS",
+      payload: { id: result.draggableId, status: destination.droppableId },
+    });
   };
 
   return (
@@ -35,7 +34,9 @@ const Board = () => {
           <ClipLoader color="var(--primary-color)" size={60} />
         ) : (
           <div className="board-main">
-            <div className="filter-container"><Filters /></div>
+            <div className="filter-container">
+              <Filters />
+            </div>
             <div className="board-columns-container">
               {taskStatus.map((status) => (
                 <Columns key={status} status={status} />

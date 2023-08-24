@@ -5,7 +5,7 @@ import TaskCard from "../../../../components/TaskCard/taskCard";
 import { Droppable } from "react-beautiful-dnd";
 
 const Columns = ({ status }) => {
-  const { readyTasks, inProgressTasks, testingTasks, doneTasks } =
+  const { readyTasks, inProgressTasks, testingTasks, doneTasks, darkMode } =
     useContext(TaskContext);
 
   let taskToRender;
@@ -35,9 +35,9 @@ const Columns = ({ status }) => {
         <span>({taskToRender?.length})</span>
       </div>
       <Droppable droppableId={status}>
-        {(provided) => (
+        {(provided, snapshot) => (
           <div
-            className="columns-item-container"
+            className={`columns-item-container ${snapshot.isDraggingOver && !darkMode ? "dragactive" : ""} ${snapshot.isDraggingOver && darkMode ? "dragactive-dark" : ""}`}
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

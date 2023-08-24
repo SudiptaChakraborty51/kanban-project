@@ -46,10 +46,12 @@ const TaskCard = ({ task, index }) => {
 
   return (
     <Draggable draggableId={id.toString()} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           key={id}
-          className={`task-card ${darkMode && "bgSecondaryDarkMode"}`}
+          className={`task-card ${darkMode && "bgSecondaryDarkMode"} ${
+            snapshot.isDragging ? "drag" : ""
+          }`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
