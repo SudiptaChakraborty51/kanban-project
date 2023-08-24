@@ -14,6 +14,7 @@
   --primary-darkmode: #0b2239;
   --secondary-darkmode: #020a12;
   --dragactive-darkmode: #1a1d1f;
+  --chart-darkmode: #94a3b8;
   --ready-border: #3b82f6;
   --in-progress-border: #eab308;
   --testing-border: #a855f7;
@@ -33,6 +34,12 @@
 
 .bgSecondaryDarkMode {
   background-color: var(--secondary-darkmode) !important;
+  color: var(--white-color) !important;
+  border-radius: 5px !important;
+}
+
+.bgChartDarkMode {
+  background-color: var(--chart-darkmode) !important;
   color: var(--white-color) !important;
   border-radius: 5px !important;
 }

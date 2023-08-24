@@ -5,7 +5,7 @@ import { TaskContext } from "../../../context/taskContext";
 import Chart from "chart.js/auto";
 
 const DoughnutCharts = () => {
-  const { taskState } = useContext(TaskContext);
+  const { taskState, darkMode } = useContext(TaskContext);
 
   const assigneeTaskCount = taskState?.tasks?.reduce((accumulator, task) => {
     const assignee = task.assignee;
@@ -16,7 +16,7 @@ const DoughnutCharts = () => {
   return (
     <div className="doughnut-chart">
       <div className="doughnut-chart-main">
-        <div className="assignee-doughnut">
+        <div className={`assignee-doughnut ${darkMode && "bgChartDarkMode"}`}>
           <h2>Task Count based on Assignee</h2>
           <Doughnut
             style={{ width: "100%", height: "100%" }}

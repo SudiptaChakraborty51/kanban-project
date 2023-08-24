@@ -4,7 +4,7 @@ import { Bar } from "react-chartjs-2";
 import { TaskContext } from "../../../context/taskContext";
 
 const BarCharts = () => {
-  const { taskState } = useContext(TaskContext);
+  const { taskState, darkMode } = useContext(TaskContext);
 
   const statusTaskCount = taskState?.tasks?.reduce((accumulator, task) => {
     const status = task.status;
@@ -21,7 +21,7 @@ const BarCharts = () => {
   return (
     <div className="bar-chart">
       <div className="bar-chart-main">
-        <div className="status-bar">
+        <div className={`status-bar ${darkMode && "bgChartDarkMode"}`}>
           <h2>Task Count based on Status</h2>
           <Bar
             data={{
@@ -52,7 +52,7 @@ const BarCharts = () => {
             }}
           />
         </div>
-        <div className="priority-bar">
+        <div className={`priority-bar ${darkMode && "bgChartDarkMode"}`}>
           <h2>Task Count based on Priority</h2>
           <Bar
             data={{
